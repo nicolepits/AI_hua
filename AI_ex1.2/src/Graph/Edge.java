@@ -7,7 +7,7 @@ package Graph;
 
 /**
  *
- * @author Nicole
+ * @author it21735 , it21754, it21762
  */
 public class Edge {
     

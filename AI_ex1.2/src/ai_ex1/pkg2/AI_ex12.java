@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Nicole
+ * @author it21735 , it21754, it21762
  */
 public class AI_ex12 {
 
@@ -22,19 +22,19 @@ public class AI_ex12 {
 
         ArrayList<Node> myNodes = new ArrayList();
 
-        Node s = new Node(0, "S");
-        Node k = new Node(1, "K");
-        Node l = new Node(2, "L");
-        Node a = new Node(3, "A");
-        Node b = new Node(4, "B");
-        Node c = new Node(5, "C");
-        Node d = new Node(6, "D");
-        Node e = new Node(7, "E");
-        Node f = new Node(8, "F");
-        Node h = new Node(9, "H");
-        Node i = new Node(10, "I");
-        Node j = new Node(11, "J");
-        Node g = new Node(12, "G");
+        Node s = new Node(0, "S",4); 
+        Node k = new Node(1, "K",5);
+        Node l = new Node(2, "L",6);
+        Node a = new Node(3, "A",2);
+        Node b = new Node(4, "B",3);
+        Node c = new Node(5, "C",4);
+        Node d = new Node(6, "D",5);
+        Node e = new Node(7, "E",6);
+        Node f = new Node(8, "F",4);
+        Node h = new Node(9, "H",3);
+        Node i = new Node(10, "I",2);
+        Node j = new Node(11, "J",1);
+        Node g = new Node(12, "G",0);
 
         //Add nodes to myNodes arrayList
         myNodes.add(a);
@@ -89,16 +89,10 @@ public class AI_ex12 {
 
         BFS_Solution bfs = new BFS_Solution();
 
-        System.out.println("BFS path from given node root S");
-        bfs.BFS(s);
+        System.out.println("Following is Best First Search from node S to G ");
+        bfs.bestFirstSearch(s,g);
 
-        //mark all nodes as unvisited
-        for (Node myNode : myNodes) {
-            myNode.visited = false;
-        }
-        System.out.println("\nFollowing is BFS from node S to node G");
-        bfs.BFS_Search(s, g);
-
+     
     }
 
 }

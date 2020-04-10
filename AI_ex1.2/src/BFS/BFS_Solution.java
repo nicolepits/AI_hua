@@ -8,76 +8,79 @@ package BFS;
 import Graph.*;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  *
- * @author Nicole
+ * @author it21735 , it21754, it21762
  */
 public class BFS_Solution {
-    
-    public void BFS(Node s) { //s=source node
+
+    private PriorityQueue<Node> queue = new PriorityQueue<Node>();
+
+    public void bestFirstSearch(Node source,Node destination) {
+
+        Node evaluationNode;
+        queue.add(source);
         
-        //All nodes by default are marked unvisited
-
-        // Create a queue for BFS 
-        LinkedList<Node> queue = new LinkedList<Node>();
-
-        // Mark the current node as visited and enqueue it 
-        s.visited = true; //visited[s.n]=true; 
-        queue.add(s);
-
-        while (queue.size() != 0) {
-            // Dequeue a vertex from queue and print it 
-            s = queue.poll();
-            System.out.print(s.getLabel() + " ");
-
-            // Get all adjacent vertices of the dequeued vertex s 
-            // If a adjacent has not been visited, then mark it 
-            // visited and enqueue it 
-            Iterator<Edge> i = s.getEdges().listIterator();
-            while (i.hasNext()) {
-                Node n = i.next().getDestination();
-                if (!n.visited) {
-                    n.visited = true;
-                    queue.add(n);
+        while (!queue.isEmpty()) {
+           
+            System.out.println();
+            System.out.println("Queue contains:");
+            for(Node n: queue){
+                System.out.print(n.label + ",");
+            }
+            System.out.println();
+            
+            evaluationNode = queue.poll();
+            System.out.print("We remove node " + evaluationNode.getLabel() + "\t");
+            
+            //Create a list of evaluation's Node's edges and keep the neighbours
+            List<Edge> myEdges = new LinkedList<Edge>();
+            myEdges = evaluationNode.getEdges();
+            List<Node> myNodes = new LinkedList<Node>();
+            
+            
+            //Append all neighbor Nodes to a list
+            for( Edge edges : myEdges){
+                
+                myNodes.add(edges.getDestination());
+                
+            }
+            
+            boolean check = false;
+            
+            //if destination node is one of the neighbours, then break from while loop
+            for(Node node : myNodes){
+                
+                if(node.getLabel().contains(destination.getLabel())){
+                    
+                    check = true;
+                    System.out.println();
+                    System.out.println("Destination node " + node.getLabel() +" found!");
+                    break;
+                    
                 }
             }
-        }
-
-    }
-    
-    public void BFS_Search(Node s,Node d) { //s=source , d=destination
-        
-        //All nodes by default are marked as unvisited
-
-        // Create a queue for BFS 
-        LinkedList<Node> queue = new LinkedList<Node>();
-
-        // Mark the current node as visited and enqueue it 
-        s.visited = true; //visited[s.n]=true; 
-        queue.add(s);
-
-        while (queue.size() != 0) {
-            // Dequeue a vertex from queue and print it 
-            s = queue.poll();
-            System.out.print(s.getLabel() + " ");
             
-            //If destination node is reached, then break from while loop
-            if(s.getLabel().contains(d.getLabel())){
+            if(check){
                 break;
             }
-            // Get all adjacent vertices of the dequeued vertex s 
-            // If a adjacent has not been visited, then mark it 
-            // visited and enqueue it 
-            Iterator<Edge> i = s.getEdges().listIterator();
-            while (i.hasNext()) {
-                Node n = i.next().getDestination();
-                if (!n.visited) {
-                    n.visited = true;
-                    queue.add(n);
-                }
+            
+            //for loop to examine all evaluationNode's neighbors
+            for(Node node: myNodes){
+                if(!node.visited){
+                    node.visited = true;
+                    queue.add(node);
+                }   
             }
+            
+            //mark evaluationNode examined;
+            evaluationNode.visited = true;
         }
         
     }
+
+  
 }
