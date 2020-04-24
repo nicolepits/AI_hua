@@ -11,9 +11,10 @@ package Graph;
  */
 public class Edge {
     
-        Node source;
-        Node destination;
-        int weight;
+        public double cost = 0;
+        public Node source;
+        public Node destination;
+        public int weight;
 
         public Edge(Node source, Node destination, int weight) {
             this.source = source;
